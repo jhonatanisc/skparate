@@ -1,16 +1,33 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>skparate</title>
-    <link rel="stylesheet" href="./src/index.css" />
-    <script type="module" src="/src/my-element.js"></script>
-  </head>
-  <body>
-    <my-element>
-      <h1>Vite + Lit</h1>
-    </my-element>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>skparate</title>
+  <link rel="stylesheet" href="./src/index.css" />
+  <script type="module" src="/src/skparate-viewer.js"></script>
+</head>
+
+<body>
+  <skparate-viewer id="demo"></skparate-viewer>
+
+  <script>
+    const viewer = document.getElementById('demo');
+
+    // Aquí le decimos que "simule" ser un componente <input>
+    viewer.element = 'input';
+
+    // Definimos las props que queremos probar en el sidebar
+    viewer.config = {
+      props: [
+        { name: 'placeholder', type: 'String', default: 'Escribe algo aquí...' },
+        { name: 'type', type: 'text|password|date|color', default: 'text' },
+        { name: 'disabled', type: 'Boolean', default: false }
+      ]
+    };
+  </script>
+</body>
+
 </html>
