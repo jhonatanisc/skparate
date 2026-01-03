@@ -1,5 +1,4 @@
 import { LitElement, html, css } from 'lit';
-import { html as staticHtml, unsafeStatic } from 'lit/static-html.js';
 
 export class SkparateViewer extends LitElement {
   static get properties() {
@@ -59,18 +58,36 @@ export class SkparateViewer extends LitElement {
     this._values = {};
   }
 
-  updated(changedProperties) {
-    if (changedProperties.has('config') && this.config) {
+  updated(changed) {
+    if (changed.has('config') && this.config) {
       const defaults = {};
       this.config.props.forEach(p => {
         let val = p.default;
-        if (p.type === 'String' && typeof val === 'string' && val.startsWith("'")) val = val.slice(1, -1);
-        if (p.type === 'Boolean') val = val === 'true' || val === true;
+
+        if (p.type === 'Boolean') val = val === true || val === 'true';
+        if (typeof val === 'string' && val.startsWith("'")) {
+          val = val.slice(1, -1);
+        }
+
         defaults[p.name] = val;
       });
-      if (Object.keys(this._values).length === 0) this._values = defaults;
+
+      if (Object.keys(this._values).length === 0) {
+        this._values = defaults;
+      }
+    }
+
+    if (
+      changed.has('_values') ||
+      changed.has('activeTab') ||
+      changed.has('element')
+    ) {
+      if (this.activeTab === 'preview') {
+        this.updateComplete.then(() => this.renderPreviewComponent());
+      }
     }
   }
+
 
   handleInput(name, value) {
     this._values = { ...this._values, [name]: value };
@@ -121,9 +138,32 @@ export class SkparateViewer extends LitElement {
     setTimeout(() => this.toasts = this.toasts.slice(1), 3000);
   }
 
-  render() {
-    const tag = this.element ? unsafeStatic(this.element) : null;
+  renderPreviewComponent() {
+    if (!this.element || !this.config) return;
 
+    const host = this.renderRoot.querySelector('#preview-host');
+    if (!host) return;
+
+    // Limpia preview anterior
+    host.innerHTML = '';
+
+    // Crea el custom element real
+    const el = document.createElement(this.element);
+
+    this.config.props.forEach(p => {
+      const val = this._values[p.name];
+
+      if (p.type === 'Boolean') {
+        if (val) el.setAttribute(p.name, '');
+      } else if (val !== undefined && val !== '') {
+        el.setAttribute(p.name, val);
+      }
+    });
+
+    host.appendChild(el);
+  }
+
+  render() {
     return html`
       <div class="layout">
         ${this.renderSidebar()}
@@ -135,12 +175,12 @@ export class SkparateViewer extends LitElement {
           </nav>
 
           <div class="viewport">
-            ${this.activeTab === 'preview' && tag ? html`
+            ${this.activeTab === 'preview' ? html`
               <div class="preview-box">
-                 <div .innerHTML="${this.generatedHTML}" @click="${() => this.toasts = [...this.toasts, { id: Date.now(), msg: 'Evento detectado' }]}"></div>
+                <div id="preview-host"></div>
               </div>
             ` : ''}
-
+            
             ${this.activeTab === 'docs' ? html`
               <div style="padding:40px">
                 <table>
