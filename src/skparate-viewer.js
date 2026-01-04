@@ -75,7 +75,7 @@ export class SkparateViewer extends LitElement {
     return html`
       <aside class="sidebar">
         ${this.config.props.map(p => html`
-          <div>
+          <div class="${p.type === 'Boolean' ? 'checkbox-item' : ''}">
             <label>${p.name}</label>
             ${this.renderControl(p)}
           </div>

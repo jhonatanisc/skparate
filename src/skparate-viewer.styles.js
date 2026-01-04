@@ -1,37 +1,181 @@
 import { css } from 'lit';
 
 export const styles = css`
-  :host {
-    --bg-sidebar: #f8f9fa;
-    --border-color: #e5e7eb;
-    --accent-color: #111827;
-    font-family: system-ui, sans-serif;
-    display: block; height: 100vh; overflow: hidden; background: white; color: #333;
-  }
-  .layout { display: flex; height: 100%; }
-  .sidebar { width: 280px; background: var(--bg-sidebar); border-right: 1px solid var(--border-color); padding: 20px; display: flex; flex-direction: column; gap: 15px; }
-  .content { flex: 1; display: flex; flex-direction: column; }
-  
-  /* Tabs */
-  .tabs { display: flex; border-bottom: 1px solid var(--border-color); padding: 0 20px; gap: 20px; }
-  .tab-btn { background: none; border: none; padding: 15px 0; cursor: pointer; color: #666; border-bottom: 2px solid transparent; }
-  .tab-btn.active { color: var(--accent-color); border-bottom-color: var(--accent-color); font-weight: bold; }
-  
-  /* Viewport */
-  .viewport { flex: 1; position: relative; overflow: auto; }
-  .preview-box { height: 100%; display: flex; align-items: center; justify-content: center; background-image: radial-gradient(#e5e7eb 1px, transparent 1px); background-size: 20px 20px; }
-  
-  /* Inputs */
-  label { display: block; font-size: 0.8rem; font-weight: bold; margin-bottom: 5px; }
-  input, select { width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
-  
-  /* Code & Docs */
-  .code-box { background: #1e1e1e; color: #d4d4d4; padding: 20px; min-height: 100%; margin: 0; }
-  table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
-  th, td { text-align: left; padding: 10px; border-bottom: 1px solid #eee; }
-  
-  /* Toast */
-  .toast-container { position: absolute; bottom: 20px; right: 20px; display: flex; flex-direction: column; gap: 10px; pointer-events: none; }
-  .toast { background: #1f1f1f; color: white; padding: 10px 20px; border-radius: 4px; animation: slideUp 0.3s ease; }
-  @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+:host {
+  --bg-main: #fdfaf6;
+  --bg-dark: #2f2433;
+  --bg-panel: #3a2e3f;
+  --bg-accent: #9E2B25;
+
+  --code-bg: #1e1b22;
+
+  --text-main: #2b2b2b;
+  --text-light: #ffffff;
+  --text-muted: rgba(255,255,255,.65);
+
+  --border-soft: rgba(0,0,0,.08);
+
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  display: block;
+  height: 100vh;
+  background: var(--bg-main);
+  pading: 0;
+  margin: 0;
+}
+
+/* Layout */
+.layout {
+  display: flex;
+  height: 100%;
+}
+
+/* Sidebar */
+.sidebar {
+  width: 280px;
+  background: var(--bg-panel);
+  color: var(--text-light);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.sidebar > div {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* Labels */
+label {
+  font-size: 11px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+
+/* Inputs & selects */
+input,
+select {
+  height: 38px;
+  padding: 0 10px;
+  border-radius: 6px;
+  border: none;
+  font-size: 14px;
+  background: #ffffff;
+  color: #000;
+}
+
+/* Checkbox */
+.checkbox-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13px;
+}
+
+.checkbox-item input {
+  width: 16px;
+  height: 16px;
+}
+
+/* Content */
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Tabs */
+.tabs {
+  display: flex;
+  gap: 32px;
+  padding: 0 32px;
+  background: var(--bg-dark);
+}
+
+.tab-btn {
+  background: none;
+  border: none;
+  color: rgba(255,255,255,.6);
+  padding: 18px 0;
+  font-size: 12px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+.tab-btn.active {
+  color: white;
+  border-bottom: 2px solid var(--bg-accent);
+}
+
+/* Viewport */
+.viewport {
+  flex: 1;
+  overflow: auto;
+  background: var(--bg-main);
+}
+
+/* Preview */
+.preview-box {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f5f5f5;
+  background-image: 
+    radial-gradient(circle at 1px 1px, rgba(0,0,0,0.1) 1px, transparent 0);
+  background-size: 20px 20px;
+}
+
+/* Code */
+.code-box {
+  background: var(--code-bg);
+  color: #e6e6e6;
+  padding: 32px;
+  font-family: ui-monospace, SFMono-Regular, monospace;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* Docs */
+.docs {
+  padding: 32px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+
+th {
+  text-align: left;
+  font-size: 11px;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: #6b6b6b;
+  padding-bottom: 12px;
+}
+
+td {
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+/* Toast */
+.toast-container {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+}
+
+.toast {
+  background: var(--bg-dark);
+  color: white;
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-size: 13px;
+}
 `;
