@@ -105,6 +105,10 @@ export class SkparateViewer extends LitElement {
     setTimeout(() => this.toasts = this.toasts.slice(1), 3000);
   }
 
+  reload() {
+    window.location.reload();
+  }
+
   renderPreviewComponent() {
     if (!this.element || !this.config) return;
 
@@ -132,6 +136,13 @@ export class SkparateViewer extends LitElement {
 
   render() {
     return html`
+      <header class="header">
+        <h1>Skparate v0.1.2</h1>
+        <button @click="${this.reload}">Reload</button>
+      </header>
+       <div class="component-banner">
+          Componente: &lt;${this.element}&gt;
+        </div>
       <div class="layout">
         ${this.renderSidebar()}
         <div class="content">

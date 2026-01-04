@@ -23,10 +23,51 @@ export const styles = css`
   margin: 0;
 }
 
+/* Header */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 24px;
+  background: var(--bg-dark);
+  color: var(--text-light);
+  border-bottom: 1px solid var(--border-soft);
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.header button {
+  background: var(--bg-accent);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.header button:hover {
+  background: #7a1f1c;
+}
+
+/* Component Banner */
+.component-banner {
+  background: var(--bg-panel);
+  color: var(--text-light);
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 500;
+  border-bottom: 1px solid var(--border-soft);
+}
+
 /* Layout */
 .layout {
   display: flex;
-  height: 100%;
+  height: calc(100vh - 64px); /* Ajustar por header */
 }
 
 /* Sidebar */
