@@ -163,7 +163,7 @@ export class SkparateViewer extends LitElement {
               <div style="padding:40px">
                 <table>
                   <tr><th>Propiedad</th><th>Tipo</th><th>Descripción</th></tr>
-                  ${this.config?.props.map(p => html`<tr><td>${p.name}</td><td><code>${p.type}</code></td><td>${p.desc}</td></tr>`)}
+                  ${this.config?.props.map(p => html`<tr><td>${p.name}</td><td><code class="type-tag">${p.type}</code></td><td>${p.desc}</td></tr>`)}
                 </table>
               </div>
             ` : ''}

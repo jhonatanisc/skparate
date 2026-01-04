@@ -205,6 +205,17 @@ td {
   border-bottom: 1px solid var(--border-soft);
 }
 
+.type-tag {
+  background: var(--bg-panel);
+  color: var(--text-light);
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
 /* Toast */
 .toast-container {
   position: absolute;
