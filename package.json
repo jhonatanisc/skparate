@@ -5,12 +5,13 @@
   "files":[
     "dist"
   ],
-  "main": "./dist/skparate.js",
+  "author": "jhonatan_isc",
+  "main": "./dist/skparate.umd.cjs",  
   "module": "./dist/skparate.js",
-  "author": "JhonatanVazquez",
   "exports": {
     ".": {
-      "import": "./dist/skparate.js"
+      "import": "./dist/skparate.js",
+      "require": "./dist/skparate.umd.cjs"
     }
   },
   "scripts": {
