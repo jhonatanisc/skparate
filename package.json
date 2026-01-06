@@ -1,12 +1,12 @@
 {
   "name": "skparate",
-  "version": "1.0.0",
+  "version": "0.3.0",
   "type": "module",
-  "files":[
+  "files": [
     "dist"
   ],
   "author": "jhonatan_isc",
-  "main": "./dist/skparate.umd.cjs",  
+  "main": "./dist/skparate.umd.cjs",
   "module": "./dist/skparate.js",
   "exports": {
     ".": {
