@@ -16,10 +16,8 @@
   <script>
     const viewer = document.getElementById('demo');
 
-    // Aquí le decimos que "simule" ser un componente <input>
     viewer.element = 'input';
 
-    // Definimos las props que queremos probar en el sidebar
     viewer.config = {
       props: [
         { name: 'placeholder', type: 'String', default: 'Escribe algo aquí...' },

@@ -114,10 +114,8 @@ export class SkparateViewer extends LitElement {
     const host = this.renderRoot.querySelector('#preview-host');
     if (!host) return;
 
-    // Limpia preview anterior
     host.innerHTML = '';
 
-    // Crea el custom element real
     const el = document.createElement(this.element);
 
     this.config.props.forEach(p => {

@@ -2,11 +2,10 @@ import { defineConfig } from 'vite';
 
 export default defineConfig({
   build: {
-    // ESTA ES LA PARTE IMPORTANTE QUE FALTA:
     lib: {
-      entry: 'src/index.js',  // Tu nuevo punto de entrada
+      entry: 'src/index.js',
       name: 'Skparate',
-      fileName: 'skparate'    // Esto forzará a que el archivo se llame skparate.js
+      fileName: 'skparate'
     },
     rollupOptions: {
       external: ['lit'],
