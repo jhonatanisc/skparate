@@ -89,11 +89,10 @@ export class SkparateViewer extends LitElement {
     if (p.type === 'Boolean') {
       return html`<input type="checkbox" ?checked="${val}" @change="${e => this.handleInput(p.name, e.target.checked)}">`;
     }
-    if (p.type.includes('|')) {
-      const opts = p.type.split('|').map(s => s.trim().replace(/'/g, ''));
+    if (p.values && Array.isArray(p.values)) {
       return html`
         <select @change="${e => this.handleInput(p.name, e.target.value)}">
-          ${opts.map(o => html`<option value="${o}" ?selected="${val === o}">${o}</option>`)}
+          ${p.values.map(o => html`<option value="${o}" ?selected="${val === o}">${o}</option>`)}
         </select>`;
     }
     return html`<input type="text" .value="${val || ''}" @input="${e => this.handleInput(p.name, e.target.value)}">`;

@@ -23,7 +23,7 @@
     viewer.config = {
       props: [
         { name: 'placeholder', type: 'String', default: 'Escribe algo aquí...' },
-        { name: 'type', type: 'text|password|date|color', default: 'text' },
+        { name: 'type', values: ["text", "password", "date", "color"], default: 'text' },
         { name: 'disabled', type: 'Boolean', default: false }
       ]
     };
