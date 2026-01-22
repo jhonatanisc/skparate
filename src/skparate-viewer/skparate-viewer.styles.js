@@ -229,5 +229,42 @@ td {
   padding: 10px 16px;
   border-radius: 6px;
   font-size: 13px;
+  margin-bottom: 8px;
 }
+
+/* Docs - Events */
+.docs-events {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.docs-event {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 12px 16px;
+  background: #ffffff;
+  border: 1px solid var(--border-soft);
+  border-radius: 8px;
+}
+
+.docs-event-name {
+  background: var(--bg-panel);
+  color: var(--text-light);
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.docs-event-desc {
+  font-size: 13px;
+  color: var(--text-main);
+  line-height: 1.5;
+}
+
 `;
