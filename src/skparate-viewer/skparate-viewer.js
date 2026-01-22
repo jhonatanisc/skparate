@@ -89,11 +89,10 @@ export class SkparateViewer extends LitElement {
     if (p.type === 'Boolean') {
       return html`<input type="checkbox" ?checked="${val}" @change="${e => this.handleInput(p.name, e.target.checked)}">`;
     }
-    if (p.type.includes('|')) {
-      const opts = p.type.split('|').map(s => s.trim().replace(/'/g, ''));
+    if (p.values && Array.isArray(p.values)) {
       return html`
         <select @change="${e => this.handleInput(p.name, e.target.value)}">
-          ${opts.map(o => html`<option value="${o}" ?selected="${val === o}">${o}</option>`)}
+          ${p.values.map(o => html`<option value="${o}" ?selected="${val === o}">${o}</option>`)}
         </select>`;
     }
     return html`<input type="text" .value="${val || ''}" @input="${e => this.handleInput(p.name, e.target.value)}">`;
@@ -115,10 +114,8 @@ export class SkparateViewer extends LitElement {
     const host = this.renderRoot.querySelector('#preview-host');
     if (!host) return;
 
-    // Limpia preview anterior
     host.innerHTML = '';
 
-    // Crea el custom element real
     const el = document.createElement(this.element);
 
     this.config.props.forEach(p => {
@@ -163,7 +160,7 @@ export class SkparateViewer extends LitElement {
               <div style="padding:40px">
                 <table>
                   <tr><th>Propiedad</th><th>Tipo</th><th>Descripción</th></tr>
-                  ${this.config?.props.map(p => html`<tr><td>${p.name}</td><td><code class="type-tag">${p.type}</code></td><td>${p.desc}</td></tr>`)}
+                  ${this.config?.props.map(p => html`<tr><td>${p.name}</td><td><code class="type-tag">${p.type ? p.type : p.values.map(v => v + " ")}</code></td><td>${p.desc}</td></tr>`)} 
                 </table>
               </div>
             ` : ''}
