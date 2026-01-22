@@ -128,7 +128,41 @@ export class SkparateViewer extends LitElement {
       }
     });
 
+    this.attachDeclaredEvents(el);
+
     host.appendChild(el);
+  }
+
+  attachDeclaredEvents(el) {
+    if (!this.config?.events) return;
+
+    this.config.events.forEach(evt => {
+      el.addEventListener(evt.name, e => {
+        const detail = e.detail
+          ? JSON.stringify(e.detail)
+          : '';
+
+        this.showToast(
+          `Evento: ${evt.name} ${detail}`,
+          'info'
+        );
+      });
+    });
+  }
+
+
+
+  showToast(msg, type = 'info', duration = 5000) {
+    const id = Date.now();
+
+    this.toasts = [
+      ...this.toasts,
+      { id, msg, type }
+    ];
+
+    setTimeout(() => {
+      this.toasts = this.toasts.filter(t => t.id !== id);
+    }, duration);
   }
 
   render() {
@@ -163,6 +197,17 @@ export class SkparateViewer extends LitElement {
                   ${this.config?.props.map(p => html`<tr><td>${p.name}</td><td><code class="type-tag">${p.type ? p.type : p.values.map(v => v + " ")}</code></td><td>${p.desc}</td></tr>`)} 
                 </table>
               </div>
+              <div style="padding:40px">
+                ${this.config?.events?.length ? html`
+                  <div class="docs-events">
+                    ${this.config.events.map(e => html`
+                    <div class="docs-event">
+                      <span class="docs-event-name">${e.name}</span>
+                      <span class="docs-event-desc">${e.desc}</span>
+                    </div>`)}
+                  </div>
+                ` : html`<p>No hay eventos declarados.</p>`}
+              </div  
             ` : ''}
 
             ${this.activeTab === 'html' ? html`
@@ -170,7 +215,7 @@ export class SkparateViewer extends LitElement {
             ` : ''}
             
             <div class="toast-container">
-              ${this.toasts.map(t => html`<div class="toast">${t.msg}</div>`)}
+              ${this.toasts.map(t => html`<div class="toast ${t.type}">${t.msg}</div>`)}
             </div>
           </div>
         </div>
