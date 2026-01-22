@@ -2,18 +2,18 @@ import { css } from 'lit';
 
 export const styles = css`
 :host {
-  --bg-main: #fdfaf6;
-  --bg-dark: #2f2433;
-  --bg-panel: #3a2e3f;
-  --bg-accent: #9E2B25;
+  --bg-main: #f4f7fb;          /* fondo general claro */
+--bg-dark: #0f172a;          /* azul noche (header / tabs) */
+--bg-panel: #1e293b;         /* paneles / sidebar */
+--bg-accent: #3b82f6;        /* azul acento (botones / active) */
 
-  --code-bg: #1e1b22;
+--code-bg: #020617;          /* código oscuro */
 
-  --text-main: #2b2b2b;
-  --text-light: #ffffff;
-  --text-muted: rgba(255,255,255,.65);
+--text-main: #0f172a;        /* texto principal */
+--text-light: #ffffff;       /* texto claro */
+--text-muted: rgba(255,255,255,.6);
 
-  --border-soft: rgba(0,0,0,.08);
+--border-soft: rgba(15,23,42,.12);
 
   font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
   display: block;
